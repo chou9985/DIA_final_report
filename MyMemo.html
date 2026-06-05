@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>期末報告防禦指南：周育謙專屬 Q&A</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-red: #e74c3c;
+            --accent-green: #27ae60;
+            --accent-blue: #2980b9;
+            --bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, 'Microsoft JhengHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ecf0f1;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 30px;
+            border-left: 5px solid var(--accent-blue);
+            padding-left: 10px;
+        }
+        h3 {
+            color: var(--primary-color);
+        }
+        .alert-card {
+            background-color: #fdedec;
+            border-left: 5px solid var(--accent-red);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .qa-card {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .question {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+        }
+        .strategy {
+            font-weight: bold;
+            color: #d35400;
+            margin-bottom: 10px;
+        }
+        .script {
+            background-color: #eafaf1;
+            border-left: 5px solid var(--accent-green);
+            padding: 15px;
+            font-style: italic;
+            color: #1e8449;
+            border-radius: 4px;
+        }
+        .rules-list li {
+            margin-bottom: 15px;
+        }
+        .highlight {
+            font-weight: bold;
+            color: var(--accent-red);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎓 期末報告防禦指南：專案統籌 周育謙</h1>
+    <p><strong>角色定位：</strong> 邏輯定調者、總司令。負責定義研究問題、捍衛管理決策的合理性與架構的學術價值。</p>
+
+    <!-- Section 1 -->
+    <h2>🚨 第一部分：緊急修正提醒（投影片地雷防禦）</h2>
+    <p>投影片中的文字若與學術邏輯有衝突，請在口頭報告或 Q&A 時主動用以下邏輯覆蓋：</p>
+
+    <div class="alert-card">
+        <h3>💣 地雷一：ROI 評估的舊文案未更新</h3>
+        <p><strong>危機：</strong> 投影片第五章寫「無法進行 ROI 量化」，但教授期中已明示「必須評估財務是否買單」。</p>
+        <p class="strategy">🛡️ 防禦策略：打出「損益兩平門檻分析」救援。</p>
+        <div class="script">
+            「老師，投影片上提到無法進行傳統 ROI 量化，是因為我們無法取得廠商真實營收。但身為管理導向專案，我們改採<strong>『損益兩平門檻分析 (Breakeven Threshold)』</strong>。系統總建置約 25 萬，攤提下來每月只需產生 2 萬元效益即可回本。我們實測出工時縮短 15%、良率提升 5%，光是減少下腳料報廢與主管調度時間，每月絕對超過 2 萬元的節省，因此這項投資在財務上是絕對合理且買單的。」
+        </div>
+    </div>
+
+    <div class="alert-card">
+        <h3>💣 地雷二：3NF 正規化 vs. 寬表 (Wide Table) 矛盾</h3>
+        <p><strong>危機：</strong> 投影片寫「未採用 3NF，採用寬表」，若教授仔細看過書面報告，會質疑你們前後矛盾。</p>
+        <p class="strategy">🛡️ 防禦策略：展現「Trade-off（取捨）」的高度。</p>
+        <div class="script">
+            「老師，我做個架構上的總結補充。我們在『靜態主檔（客戶、機台）』確實遵循 3NF 以確保資料不重複；但在『高頻寫入的動態生產看板』上，為了避免地端單機 Server 產生嚴重的 Table Locking 與 Join 開銷，我們<strong>刻意在動態表採用了反正規化的寬表（Wide Table）設計</strong>。這是在中小型工廠硬體受限下，為了確保『看板絕對即時性』所做的務實妥協 (Trade-off)。」
+        </div>
+    </div>
+
+    <!-- Section 2 -->
+    <h2>🛡️ 第二部分：周育謙專屬 Q&A 題庫</h2>
+
+    <div class="qa-card">
+        <div class="question">Q1. 核心定位挑戰：「這家工廠只有 7 台機台，資料量這麼小，憑什麼說這是『資料密集型應用系統 (DIA)』？不就是個普通資料庫專題？」</div>
+        <p class="strategy">策略：把重點從「資料量 (Volume)」轉移到「資料的複雜度 (Complexity) 與 即時一致性要求 (Consistency)」。</p>
+        <div class="script">
+            「老師，的確單論儲存容量遠不及巨量資料。但本專案符合 DIA 精神，在於其<strong>『資料處理的複雜度與即時一致性』</strong>。第一，必須將師傅隱性經驗（A7/A8留白）轉化為資料庫防呆約束，實踐 Data Integrity；第二，7 台機台每 5 秒產生一次感測器訊號，系統必須在 1-3-3 漏斗架構下，即時聚合高頻串流並重算排程，確保節點的順序一致性（Ordering Consistency）。在傳產環境中精準管理這種高頻資料流，正是 DIA 的實務價值。」
+        </div>
+    </div>
+
+    <div class="qa-card">
+        <div class="question">Q2. 決策邊界挑戰：「你們說決策層是『半自動化』，那遇到急單時，到底排程是系統決定的，還是人決定的？」</div>
+        <p class="strategy">策略：明確切分「系統的算力」與「人類的情境判斷」，展現務實管理界線。</p>
+        <div class="script">
+            「老師，排程的<strong>『最佳化時序方案』是系統算的，但『最終執行權』是人決定的</strong>。系統透過 EDD 與 SPT 演算法，瞬間算出最新預計完工時間（EET）。但我們刻意不讓系統直接控制機台，因為現場有『無法被資料庫參數化』的變數（如布料異常、人員請假）。系統扮演的是決策支援（DSS），提供客觀數據，讓人來做最後的例外管理確認。」
+        </div>
+    </div>
+
+    <div class="qa-card">
+        <div class="question">Q3. 個人貢獻挑戰：「育謙，你負責統籌與撰寫，那你對這個專案的『資料管理分析』具體有什麼實質貢獻？還是只負責排版 Word？」</div>
+        <p class="strategy">策略：強調你建立的是「分析框架」，將實務經驗轉譯為學術理論。</p>
+        <div class="script">
+            「老師，原始素材是奕昇的實務導入案，但我作為統籌的核心貢獻是<strong>『建構學術分析框架』</strong>。我負責將這套實務系統拆解，對應到課程核心概念：將『欄位設計』對應 Schema 約束、將『多機台同步』對應單機架構的 Trade-off、將『看板導入』定義為從經驗到數據的決策轉型。我確保這份報告不是一篇『軟體操作手冊』，而是一份具備嚴謹因果關係與管理意涵的『資料架構分析報告』。」
+        </div>
+    </div>
+
+    <div class="qa-card">
+        <div class="question">Q4. 效益解釋挑戰：「你們說製程時間縮短了 15.16%，到底是因為工人變熟練了，還是系統的功勞？你怎麼證明？」</div>
+        <p class="strategy">策略：扣緊「資訊流」優化實體「物流」的概念。</p>
+        <div class="script">
+            「老師，我們確認硬體的車縫速度（RPM）完全沒有改變。這 15.16% 的時間縮短，純粹來自<strong>『資訊隱性等待時間的消除』</strong>。以前前段剖巾完要靠人工喊，後段才知道開工；現在 EET 動態預測讓後段機台看著看板無縫接軌。我們是透過『即時資料流的串聯』，消除了實體物流的排隊空窗期，這正是資料管理帶來的實質效益。」
+        </div>
+    </div>
+
+    <!-- Section 3 -->
+    <h2>💡 第三部分：育謙的臨場應對守則 (Dos & Don'ts)</h2>
+    <ul class="rules-list">
+        <li><strong>🤝 做球給隊友 (Bridging)：</strong> 身為統籌不需要回答所有底層技術細節。若教授問了很深的 SQL 語法或 ETL 封包抓取問題：<br>
+            <em>「老師，這是一個很好的架構實作問題，這部分由負責資料架構剖析的<span class="highlight">士豪</span>來為您做最精確的技術解答。士豪請補充。」</em>
+        </li>
+        <li><strong>🛑 絕不硬拗「名詞」：</strong> 教授非常討厭名詞堆砌。若被質疑「為什麼不用雲端/微服務」，要理直氣壯地回答：<br>
+            <em>「老師，我們刻意不用。因為我們評估過規模與成本，這間工廠用微服務是『過度工程 (Over-engineering)』，用單機 SQL 是經過計算的 Trade-off。」</em>
+        </li>
+        <li><strong>⚖️ 語氣展現「第三方分析者」的客觀：</strong> 系統是組員做的，但報告是你統籌的。保持客觀口吻：<br>
+            <em>「經過我們小組的分析發現...」、「我們驗證了這套系統的資料架構...」</em>，凸顯這是一份學術專案報告，而非廠商推銷簡報。
+        </li>
+    </ul>
+
+</div>
+
+</body>
+</html>
