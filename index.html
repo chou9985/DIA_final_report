@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>資料密集型應用系統 - 期末Q&A應戰手冊</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        
+        /* Tab Styles */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #e9ecef;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+        }
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+            flex-grow: 1;
+            color: #555;
+        }
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        .tab button.active {
+            background-color: #3498db;
+            color: white;
+        }
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-top: none;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Q&A Card Styles */
+        .qa-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            background-color: #fff;
+            border-left: 5px solid #3498db;
+        }
+        .question {
+            font-weight: bold;
+            color: #c0392b;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+        }
+        .answer {
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+        .rationale {
+            font-size: 0.9em;
+            color: #555;
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px dashed #ccc;
+        }
+        .role-desc {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>期末報告 Q&A 應戰手冊 (第三組)</h1>
+
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Chou')" id="defaultOpen">周育謙 (統籌與報告撰寫)</button>
+        <button class="tablinks" onclick="openTab(event, 'Lin')">林奕昇 (場域實測與資料提供)</button>
+        <button class="tablinks" onclick="openTab(event, 'Huang')">黃士豪 (資料架構與模型剖析)</button>
+        <button class="tablinks" onclick="openTab(event, 'Hsieh')">謝侑倫 (統計驗證與財務分析)</button>
+    </div>
+
+    <!-- 周育謙的頁籤 -->
+    <div id="Chou" class="tabcontent">
+        <div class="role-desc">您的角色定位：【專案框架建構者】<br>負責將工程流水帳轉化為學術論述，定義研究問題，把控「Trade-off（架構取捨）」與「DSS（決策支援）」的論述方向。遇到深層技術題，負責將發言權 Pass 給組員。</div>
+        
+        <div class="qa-card">
+            <div class="question">Q1：這份報告的資料量這麼小（僅7台機台），為什麼這算是「資料密集型 (Data-Intensive)」專案？</div>
+            <div class="answer">
+                <strong>育謙答覆：</strong><br>
+                「老師，我們小組在定題時也自我檢驗過這個問題。我們認為，這份專案的複雜度不是來自『資料的體積（Volume）』，而是來自『資料的即時性與一致性約束（Complexity）』。<br><br>
+                在 1剖、3滾、3摺 的連續供料特性下，只要有一個機台的完工資料沒對接好，後面 6 台機器就會陷入停工。探討如何透過 Schema 約束來管理這種高度依賴的資料複雜度，並在不穩定的工廠環境中保持資料一致性，完全符合這堂課探討『管理資料複雜度』的核心精神。」
+            </div>
+            <div class="rationale">💡 邏輯解析：用「一致性與複雜度」反擊「資料量太小」的弱點。</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question">Q2：為什麼系統不直接做到「全自動無人排程」，還要留給主管確認？</div>
+            <div class="answer">
+                <strong>育謙答覆：</strong><br>
+                「這是在匯總分析效益時，我們得出的實務結論。製造現場存在許多無法『結構化』的變數，例如布料突發瑕疵、或是操作員臨時請假。如果系統直接取代主管發送指令，會造成產線大亂。<br><br>
+                因此我們將系統定位為『半自動化決策支援系統（DSS）』。讓演算法處理高頻的 EET 運算，畫出甘特圖；但把最後的插單決定權留給人類。這樣既確保了數據客觀，又保留管理彈性。」
+            </div>
+            <div class="rationale">💡 邏輯解析：展現「管理導向專案」的務實思維，不迷信全自動化。</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question">Q3：周同學，你的分工是統籌與撰寫，所以你只是幫忙排版嗎？</div>
+            <div class="answer">
+                <strong>育謙答覆：</strong><br>
+                「老師，這份報告最困難的地方是『視角的轉換』。一開始奕昇帶來的個案，是一份純粹的『軟體工程報告』。<br><br>
+                我的主要貢獻是定義出三個核心問題，把報告的重心從『我們寫了什麼程式』轉移到探討『為什麼我們不採用雲端架構的 Trade-off』。統整大家的工程數據與財務計算，收斂成符合您課堂要求的『資料架構管理論述』，是我花最多心力的地方。」
+            </div>
+            <div class="rationale">💡 邏輯解析：明確交代自己「學術化、理論化」的實質貢獻。</div>
+        </div>
+    </div>
+
+    <!-- 林奕昇的頁籤 -->
+    <div id="Lin" class="tabcontent">
+        <div class="role-desc">您的角色定位：【領域專家與場域還原者】<br>負責提供第一手資料。當老師質疑工廠現況、ETL資料到底怎麼抓、機台怎麼運作時，由您負責用「業界實務」來背書。</div>
+
+        <div class="qa-card">
+            <div class="question">Q1：你們一直提到「1-3-3 漏斗型架構」，這到底是什麼意思？為什麼它會成為瓶頸？</div>
+            <div class="answer">
+                <strong>奕昇答覆：</strong><br>
+                「老師，這是毛巾廠真實的實體物流拓撲。前端只有『1 台』剖巾機負責把大卷的胚布裁開，它是唯一的供料核心。裁完後分流給後面『3 台』滾邊機縫邊，最後交給『3 台』摺頭機收尾。<br><br>
+                這就是漏斗型架構：只要前端那 1 台剖巾機排程塞車或故障，沒有即時把資料傳遞下去，後面的 6 台機器就會全部斷鏈待料。這也是為什麼我們迫切需要即時資料流的原因。」
+            </div>
+            <div class="rationale">💡 邏輯解析：用生動的實務畫面，讓老師理解「為何這個工廠需要資料系統」。</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question">Q2：這份報告是不是直接拿你公司的工作報告來交差？</div>
+            <div class="answer">
+                <strong>奕昇答覆：</strong><br>
+                「老師，我確實提供了這個真實的顧問導入案作為『素材』。但我原本的工作報告只有寫『我裝了什麼感測器、寫了什麼介面』。<br><br>
+                這份期末報告是我們整組重新拆解出來的。我們加入了士豪對 Schema 演化的探討、侑倫跑的統計檢定，以及育謙設定的 Trade-off 分析框架。我們是『基於實務個案，重新進行學術研究』，這跟原本的結案報告完全是兩回事。」
+            </div>
+            <div class="rationale">💡 邏輯解析：大方承認素材來源，但堅定捍衛「這是全組重新做學術分析」的立場。</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question">Q3：你們的 ETL 資料來源，到底是人工輸入還是系統抓的？</div>
+            <div class="answer">
+                <strong>奕昇答覆：</strong><br>
+                「老師，在現場我們是採取『雙軌並行』。<br>
+                第一軌是『管理資料』：像是訂單規格、交期，這是生管人員透過前端 UI 介面輸入的。<br>
+                第二軌是『實體資料』：我們在 7 台機台上裝了 Smart Box 感測器，每 5 秒抓取一次轉速、斷紗停機等物理訊號。<br>
+                我們把商業資料跟機台高頻資料在整合層對接，才能算出精準的 EET（預計完工時間）。」
+            </div>
+            <div class="rationale">💡 邏輯解析：精準回答期中報告老師最愛質疑的「資料從哪裡來」的問題。</div>
+        </div>
+    </div>
+
+    <!-- 黃士豪的頁籤 -->
+    <div id="Huang" class="tabcontent">
+        <div class="role-desc">您的角色定位：【資料架構與 Schema 設計師】<br>負責防禦所有關於「資料庫設計、正規化、防呆約束」的技術攻擊。您是告訴老師「為什麼我們刻意違反正規化」的關鍵人物。</div>
+
+        <div class="qa-card">
+            <div class="question">Q1：你們在簡報提到「反正規化設計 / 寬表 (Wide Table)」，這不是違反資料庫設計原則嗎？</div>
+            <div class="answer">
+                <strong>士豪答覆：</strong><br>
+                「老師，這是我們經過考量的 Trade-off（妥協）。因為我們的地端伺服器效能不高，但又要面臨 7 台感測器的高頻寫入，以及甘特圖看板的即時讀取。<br><br>
+                如果嚴格遵守 3NF，每次畫甘特圖都要做大量的 Join，會產生極大的 Overhead（系統負擔）甚至引發 Table Locking（資料表鎖定）。所以我們刻意採用扁平化的寬表結構，用空間換取 I/O 效能，這是為了維持工廠系統穩定性的務實設計。」
+            </div>
+            <div class="rationale">💡 邏輯解析：這題是必殺技！教授最喜歡懂「為了效能而刻意反正規化」的學生，這展現了深厚的系統調校底子。</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question">Q2：你們的架構為什麼不直接上雲端？用 AWS 或 GCP 不是更方便擴充嗎？</div>
+            <div class="answer">
+                <strong>士豪答覆：</strong><br>
+                「老師，我們主動排除了雲端與分散式架構，有三個原因：<br>
+                第一是『規模適配』，7 台機器的吞吐量，單機 SQL 完全吃得下，不需要過度工程（Over-engineering）。<br>
+                第二是『維護難度』，傳產沒有 DevOps 人員，分散式系統的 Trace 盲區會讓他們無法除錯。<br>
+                第三是『斷網風險』，鐵皮工廠外網不穩，萬一發生 Network Partitioning（網路分區），排程系統會直接癱瘓停工。<br>
+                所以我們採用地端單節點 SQL，這是在可用性與成本間的最佳取捨。」
+            </div>
+            <div class="rationale">💡 邏輯解析：完美運用課程專有名詞（過度工程、Trace盲區、Network Partitioning）進行防禦。</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question">Q3：報告裡提到的 A7、A8 欄位（刀具/布邊留白）到底有什麼特別的學術意義？</div>
+            <div class="answer">
+                <strong>士豪答覆：</strong><br>
+                「A7、A8 是落實『資料完整性（Data Integrity）』的關鍵。過去，裁切要留多少白，是師傅腦袋裡的『隱性知識』，常常因為口頭傳達錯誤導致報廢。<br><br>
+                我們把它定義成結構化 Schema，並在前端輸入時進行防呆。如果留白參數邏輯衝突，系統會拒絕寫入資料庫（Reject Transaction）。我們成功把人的經驗轉化為系統底層的約束條件，從源頭阻絕了髒資料。」
+            </div>
+            <div class="rationale">💡 邏輯解析：將一個小小的欄位，拔高到「隱性知識結構化」與「Data Integrity」的學術高度。</div>
+        </div>
+    </div>
+
+    <!-- 謝侑倫的頁籤 -->
+    <div id="Hsieh" class="tabcontent">
+        <div class="role-desc">您的角色定位：【數據驗證與財務守門員】<br>負責防禦「成效是不是瞎掰的」以及「沒有財報怎麼算 ROI」的質疑。您是確立這份報告具備「量化說服力」的人。</div>
+
+        <div class="qa-card">
+            <div class="question">Q1：你們說廠商沒有給營收數據，那第五章的財務 ROI 評估數字是怎麼算出來的？</div>
+            <div class="answer">
+                <strong>侑倫答覆：</strong><br>
+                「老師，正如您期中提醒的，成本效益非常重要。因為我們確實拿不到真實營收，為了避免捏造數據，我改用了管理學上的『損益兩平門檻分析（Breakeven Threshold Analysis）』。<br><br>
+                我精算了系統總建置成本約 25 萬。攤提下來，系統每個月只要能幫工廠『省下』 2 萬塊就回本了。我們實測出工時縮短 15%、良率提升 5%，光是少丟掉 5% 的毛巾布料以及省下主管加班排程的時間，每個月絕對超過兩萬塊的價值。這證明了我們的架構選型在財務上是完全合理的。」
+            </div>
+            <div class="rationale">💡 邏輯解析：完美避開「沒有營收數據」的死穴，展現「門檻分析」的務實思維，老師絕對會買單。</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question">Q2：你們的 t 檢定只有 n=3（三組實測），這樣在統計上有意義嗎？</div>
+            <div class="answer">
+                <strong>侑倫答覆：</strong><br>
+                「老師，您說得對，n=3 的樣本數確實存在統計效力（Statistical Power）受限的問題。但我們還是堅持進行配對樣本 t 檢定。<br><br>
+                在 df=2 的情況下，因為我們實測的改善幅度非常穩定（分別縮短 31、35、31 分鐘），算出來的 t 值高達 24.31，p 值小於 0.05 達到了顯著水準。這雖然不能做大規模的跨廠推論，但在這個單一場域中，足夠證明『時間縮短不是偶然發生的』。」
+            </div>
+            <div class="rationale">💡 邏輯解析：主動承認樣本數小的缺陷，但堅守「p值達標，證明非巧合」的底線，展現嚴謹態度。</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question">Q3：你們報告中說全製程耗時改善了 15.16%，這數字怎麼來的？</div>
+            <div class="answer">
+                <strong>侑倫答覆：</strong><br>
+                「這是我把奕昇在現場量測的三組完整時間戳記進行匯總平均算出來的。<br><br>
+                導入前的平均耗時是 213.3 分鐘，導入後平均降到 181.0 分鐘。縮短的這 32 分鐘（大約 15.16%），並不是因為機台切毛巾的速度變快了，而是我們透過即時資料流，消除了前段跟後段機台之間的『資訊隱性等待時間』。」
+            </div>
+            <div class="rationale">💡 邏輯解析：精準背出 213.3 與 181.0，並強調「是資料流讓時間縮短，不是硬體變快」，完美扣合課程。</div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        // 預設開啟第一個頁籤
+        document.getElementById("defaultOpen").click();
+    </script>
+
+</body>
+</html>
