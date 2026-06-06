@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毛巾工廠智慧車縫管理系統導入 - 專案管理期末報告</title>
+    <style>
+        :root {
+            --primary-color: #1a4b6e;
+            --secondary-color: #2980b9;
+            --accent-color: #e67e22;
+            --success-color: #27ae60;
+            --danger-color: #c0392b;
+            --bg-light: #f4f7f6;
+            --text-dark: #2c3e50;
+            --border-color: #bdc3c7;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Microsoft JhengHei';
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 4px solid var(--secondary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        h2 {
+            color: white;
+            background-color: var(--secondary-color);
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin-top: 40px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+        }
+        h2::before {
+            content: '📌';
+            margin-right: 10px;
+        }
+        h3 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+            margin-top: 25px;
+        }
+        .highlight-box {
+            background-color: var(--bg-light);
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .term-badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+        .text-center { text-align: center; }
+        .bg-red { background-color: #fadbd8; color: var(--danger-color); font-weight: bold;}
+        .bg-yellow { background-color: #fcf3cf; color: #b9770e; font-weight: bold;}
+        .bg-green { background-color: #d5f5e3; color: var(--success-color); font-weight: bold;}
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .card {
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .card h4 { margin-top: 0; color: var(--secondary-color); }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>智慧化生產排程系統導入專案</h1>
+        <p>專案管理期末報告 | 核心執行、監控與結案階段分析</p>
+        <p style="font-weight: normal; color: #95a5a6;">延續期中規劃，探討毛巾車縫產線數位轉型之實務管理</p>
+    </div>
+
+    <div class="highlight-box" style="border-left-color: var(--success-color);">
+        <strong>前言回顧與現況說明：</strong><br>
+        在期中階段，本團隊已確立了專案的 WBS（涵蓋硬體層、數據層、邏輯層與介面層），並採用「平衡矩陣」組織架構，以「社會技術系統」觀點引導現場老員工接受數位化。本期末報告將聚焦於專案進入<strong>實體執行與監控階段</strong>時，如何運用風險管理、資源排程優化、實獲值監控及完善的結案機制，確保整體產能提升 25%、交期縮短 15% 的戰略目標如期達成。
+    </div>
+
+    <!-- 一、專案風險管理與應變 -->
+    <h2>一、專案風險管理與應變機制</h2>
+    <p>傳統毛巾產業過去高度仰賴人工與紙本，導入聯網 Smart Box 與排程演算法屬全新嘗試。我們採取「主動預防」策略，建立風險登記表，並利用 FMEA（失效模式與效應分析）量化風險值。</p>
+
+    <h3>1. 核心風險識別與 FMEA 評估矩陣</h3>
+    <table>
+        <tr>
+            <th width="20%">風險事件 (Risk Event)</th>
+            <th width="10%">衝擊 (I)</th>
+            <th width="10%">機率 (P)</th>
+            <th width="10%">偵測 (D)</th>
+            <th width="10%">風險值</th>
+            <th width="40%">回應策略與應急計畫 (Response & Contingency)</th>
+        </tr>
+        <tr>
+            <td><strong>設備相容性風險：</strong><br>30年老舊剖巾機無法穩定傳輸轉速訊號</td>
+            <td class="text-center">5</td>
+            <td class="text-center">4</td>
+            <td class="text-center">3</td>
+            <td class="text-center bg-red">60</td>
+            <td>
+                <span class="term-badge">減輕 Mitigate</span> 提前進行單機訊號測試。<br>
+                <strong>觸發條件：</strong>連續 3 次擷取封包遺失。<br>
+                <strong>應急計畫：</strong>動用<span class="term-badge">管理準備金</span>採購外掛式光電感測器替代內部訊號讀取。
+            </td>
+        </tr>
+        <tr>
+            <td><strong>現場人員抗拒操作：</strong><br>員工覺得數位面板太複雜而拒絕使用</td>
+            <td class="text-center">4</td>
+            <td class="text-center">3</td>
+            <td class="text-center">2</td>
+            <td class="text-center bg-yellow">24</td>
+            <td>
+                <span class="term-badge">減輕 Mitigate</span> UI 介面採直觀顏色與拖曳設計。<br>
+                <strong>觸發條件：</strong>新工單漏登錄率 > 10%。<br>
+                <strong>應急計畫：</strong>由專案經理啟動一對一輔導，暫時恢復「紙本/數位雙軌並行」。
+            </td>
+        </tr>
+        <tr>
+            <td><strong>網路斷線風險：</strong><br>廠房鋼筋屏蔽導致資料庫連線中斷</td>
+            <td class="text-center">5</td>
+            <td class="text-center">2</td>
+            <td class="text-center">1</td>
+            <td class="text-center bg-green">10</td>
+            <td>
+                <span class="term-badge">避免 Avoid</span> <strong>架構決策：</strong>放棄雲端架構，改採「地端單節點 SQL 伺服器」，徹底消除外網中斷風險。
+            </td>
+        </tr>
+    </table>
+
+    <!-- 二、資源排程與時程壓縮策略 -->
+    <h2>二、資源排程與時程壓縮策略</h2>
+    <p>本專案屬於 <span class="term-badge">資源限制型 (Resource-Constrained)</span> 專案。廠內無法停止日常 OEM（如彼得兔毛巾）的生產線來配合 IT 施工，且專案團隊的工程師資源有限。</p>
+
+    <div class="grid-2">
+        <div class="card">
+            <h4>1. 資源平準化與啟發式法則應用</h4>
+            <p>當 IT 人員同時要為「剖巾機 (1台)」與「滾邊機 (3台)」安裝感測器，卻只能同時處理一台時，發生資源衝突。我們應用<strong>排程啟發式法則 (Heuristics)</strong>：</p>
+            <ul>
+                <li><strong>Rule 1 最小寬裕時間優先：</strong>剖巾機是全廠唯一的瓶頸機台（無備援），寬裕時間為 0。</li>
+                <li><strong>決策結果：</strong>資源優先分配給剖巾機，滾邊機的安裝任務利用其晚開始時間 (Late Start) 向後延遲。</li>
+                <li><strong>避免分割活動：</strong>安裝過程絕不中斷，以避免產生機台重複停機的「啟動/關閉成本」。</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>2. 應對急單的專案趕工 (Crashing)</h4>
+            <p>當面臨客戶的特急單（如運動品牌大單），導致專案必須提早上線時，我們進行成本-時間圖分析：</p>
+            <ul>
+                <li>硬體趕工（停工安裝）：會損失龐大的 OEM 產能，<strong>趕工成本斜率極高</strong>。</li>
+                <li>軟體趕工（UI 與演算法開發）：只需支付 IT 工程師加班費，<strong>趕工成本斜率較低</strong>。</li>
+                <li><strong>決策：</strong>優先針對「軟體邏輯層」進行趕工，並採用 <span class="term-badge">快速跟進 (Fast Tracking)</span>，讓 SQL 資料庫建置與前端 UI 設計從「依序執行」改為「平行作業」。</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 三、實獲值管理與進度監控 -->
+    <h2>三、實獲值管理 (EVM) 與進度監控</h2>
+    <p>為了擺脫過去「憑感覺」評估進度的盲點，專案導入實獲值管理，建立了時間定相預算基準 (Time-Phased Budget Baseline)。以下為專案執行至第 4 個月（總期程 6 個月）的期中狀態評估：</p>
+
+    <h3>專案第 4 個月狀態報告 (Status Report)</h3>
+    <table>
+        <tr>
+            <th>指標名稱</th>
+            <th>數據 / 計算公式</th>
+            <th>數值結果</th>
+            <th>管理意涵解讀</th>
+        </tr>
+        <tr>
+            <td>計畫值 (PV)</td>
+            <td>預計應完成工作之預算</td>
+            <td>$ 80,000</td>
+            <td>原訂第4個月應完成的進度價值。</td>
+        </tr>
+        <tr>
+            <td>實獲值 (EV)</td>
+            <td>實際完成工作之預算價值</td>
+            <td>$ 72,000</td>
+            <td>實際進度僅達成預期的 90%。</td>
+        </tr>
+        <tr>
+            <td>實際成本 (AC)</td>
+            <td>目前實際花費</td>
+            <td>$ 65,000</td>
+            <td>支出控制良好，低於預期花費。</td>
+        </tr>
+        <tr>
+            <td class="bg-yellow">時程變異 (SV)<br>時程績效 (SPI)</td>
+            <td>SV = EV - PV<br>SPI = EV / PV</td>
+            <td>SV = -$ 8,000<br><strong>SPI = 0.90</strong></td>
+            <td><strong>進度落後：</strong>因演算法測試時遇到特殊規格毛巾（留白參數 A7/A8 異常），導致邏輯層開發延遲。</td>
+        </tr>
+        <tr>
+            <td class="bg-green">成本變異 (CV)<br>成本績效 (CPI)</td>
+            <td>CV = EV - AC<br>CPI = EV / AC</td>
+            <td>CV = +$ 7,000<br><strong>CPI = 1.11</strong></td>
+            <td><strong>成本節約：</strong>在地端伺服器建置上，利用了廠內既有舊主機升級，省下硬體採購費。</td>
+        </tr>
+    </table>
+    
+    <div class="highlight-box">
+        <strong>🎯 預測與矯正行動 (Corrective Actions)：</strong><br>
+        目前專案處於<strong>「進度落後但預算結餘」</strong>的狀態。由於專案總預算 (BAC) 為 $125,000，目前的 CPI 高達 1.11，顯示我們有充裕的資金。專案經理的決策是：<strong>將結餘的成本轉換為時間</strong>。提撥部分結餘預算，聘請外部 UI 測試員協助進行「可視化排程看板」的測試，以加速剩餘進度，確保 6 個月的總交期 (Time-Constrained) 不被打破。
+    </div>
+
+    <!-- 四、專案結案與經驗學習 -->
+    <h2>四、專案結案與經驗學習 (Project Closure)</h2>
+    <p>歷經 6 個月的導入，系統正式上線並由系統全面取代人工調度。產線良率由 90% 提升至 95%，訂單處理週期縮短 15%。本專案順利進入 <span class="term-badge">正常結案 (Normal Closure)</span> 階段。</p>
+
+    <div class="grid-2">
+        <div class="card">
+            <h4>1. 結案核心活動</h4>
+            <ul>
+                <li><strong>交付與驗收：</strong>現場主管確認動態甘特圖能正確反映 1台剖巾、3台滾邊、3台摺頭機的即時負載，簽署驗收單。</li>
+                <li><strong>資源釋放：</strong>IT 開發團隊解編，回歸日常維護任務；臨時測試設備歸還。</li>
+                <li><strong>SOP 標準化：</strong>將數位排程納入廠區標準作業程序，完成知識移轉。</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>2. 團隊績效評估原則</h4>
+            <ul>
+                <li>採用 <strong>360度回饋</strong>：不僅 IT 主管評分，也請產線操作員對系統設計者的「溝通友善度」給予回饋。</li>
+                <li><strong>對事不對人：</strong>評估重點在於「目標達成率（如：資料寫入正確率）」，而非與其他成員做比較。</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>3. 專案回顧與經驗學習 (Lessons Learned)</h3>
+    <p>我們委由非專案核心的第三方引導者進行專案稽核，確保過程「不是獵巫」，而是為了組織成長。提煉出以下三大經驗：</p>
+    <ul>
+        <li><strong>隱性知識顯性化的重要性：</strong>初期忽略了老師傅對於「刀具留白(A7)」與「布邊留白(A8)」的隱性經驗，導致初期系統運算產能失準。<strong>教訓：</strong>未來導入新製程前，必須先進行「參數標準化」訪談，強制納入資料庫防呆約束。</li>
+        <li><strong>實體物理約束優先於軟體邏輯：</strong>曾試圖用演算法無限優化排程，卻忽略機台實體換線需要時間。<strong>教訓：</strong>未來演算法開發必須將「硬體啟動/關閉成本」直接寫入排程等待時間 (Queueing Time) 中。</li>
+        <li><strong>資料庫 Schema 的務實設計：</strong>考量廠內維運能力與設備效能，未採用複雜的正規化，而是採用「扁平化寬表設計」。<strong>教訓：</strong>在傳產轉型中，「適配性」比「最先進技術」更重要，此架構模式應沿用至未來的二期專案。</li>
+    </ul>
+
+    <!-- 五、總結 -->
+    <h2>五、總結</h2>
+    <p>本專案成功運用了系統化的專案管理手法，將傳統毛巾車縫廠的「經驗導向」轉型為「數據導向」。從期中的<strong>WBS 規劃與矩陣溝通</strong>，到期末嚴謹的<strong>風險防範、資源平準化、EVM 數據監控及完善的結案學習</strong>。不僅達成了降低成本、提升稼動率的硬指標，更為公司建立了一套可複製的數位轉型專案管理框架，成功彌補了組織戰略與現場執行之間的差距，為企業創造了長期的競爭護城河。</p>
+
+</div>
+
+</body>
+</html>
