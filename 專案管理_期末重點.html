@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專案管理期末報告：深度理論知識庫與 AI 輔助大綱</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #2980b9;
+            --accent: #16a085;
+            --bg-light: #f8f9fa;
+            --border: #dee2e6;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Microsoft JhengHei';
+            line-height: 1.7;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #f4f7f6;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            border-bottom: 4px solid var(--secondary);
+            padding-bottom: 15px;
+            font-size: 2.2em;
+        }
+        h2 {
+            color: #fff;
+            background-color: var(--secondary);
+            margin-top: 40px;
+            padding: 12px 20px;
+            border-radius: 6px 6px 0 0;
+            font-size: 1.5em;
+        }
+        h3 {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h4 {
+            color: var(--primary);
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        .chapter-content {
+            background: #fff;
+            padding: 25px;
+            border-radius: 0 0 6px 6px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+            border-top: none;
+        }
+        ul, ol { padding-left: 25px; }
+        li { margin-bottom: 8px; }
+        
+        .ai-guide {
+            background-color: #e8f4f8;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+        .ai-guide h4 { color: #2980b9; margin-top: 0; font-weight: bold; }
+        
+        .formula-box {
+            background-color: #e8f8f5;
+            border: 2px dashed #1abc9c;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.1em;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+        tr:nth-child(even) { background-color: #f8f9fa; }
+        
+        /* Specific Table Styles */
+        .risk-matrix th, .risk-matrix td { text-align: center; vertical-align: middle; }
+        .bg-red { background-color: #e74c3c; color: white; font-weight: bold; }
+        .bg-yellow { background-color: #f1c40f; font-weight: bold; color: #333;}
+        .bg-green { background-color: #2ecc71; color: white; font-weight: bold;}
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+            color: #d35400;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📚 專案管理期末報告：深度理論知識庫</h1>
+    <p style="text-align: center; font-size: 1.1em; color: #666;">供 AI 工具讀取與期末報告大綱撰寫使用，涵蓋 Ch7, Ch8, Ch9, Ch13, Ch14 完整概念與計算邏輯。</p>
+
+    <!-- Chapter 7: Managing Risk -->
+    <h2>Chapter 7: 專案風險管理 (Managing Risk)</h2>
+    <div class="chapter-content">
+        <p><strong>風險定義：</strong>一種不確定的事件或情況，一旦發生，會對專案目標產生正面(機會)或負面(威脅)的影響。風險管理是「主動預防」而非「被動反應」。</p>
+
+        <h3>1. 風險管理四步驟流程 (Risk Management Process)</h3>
+        <ol>
+            <li><strong>風險識別 (Risk Identification):</strong>
+                <ul>
+                    <li>列出所有可能影響專案的風險（先看總體 Macro，再看細節）。</li>
+                    <li><strong>工具：</strong>風險分解結構 (Risk Breakdown Structure, RBS) 結合工作分解結構 (WBS)、風險剖析 (Risk Profile，針對傳統不確定領域的提問清單)。</li>
+                </ul>
+            </li>
+            <li><strong>風險評估 (Risk Assessment):</strong>
+                <ul>
+                    <li><strong>情境分析 (Scenario analysis):</strong> 評估機率 (Probability) 與 衝擊 (Impact)。</li>
+                    <li><strong>失效模式與效應分析 (FMEA):</strong> <span class="highlight">風險值 (Risk Value) = 衝擊 (Impact) × 機率 (Probability) × 偵測難易度 (Detection)</span></li>
+                    <li><strong>機率分析：</strong>決策樹 (Decision trees)、PERT 模擬。</li>
+                </ul>
+            </li>
+            <li><strong>發展風險回應 (Risk Response Development):</strong> 針對負面與正面風險制定策略。</li>
+            <li><strong>風險控制 (Risk Response Control):</strong> 建立風險登記表 (Risk Register)，監控觸發事件，執行應急計畫，並進行變更控制管理。</li>
+        </ol>
+
+        <h3>2. 風險與機會回應策略 (Response Strategies)</h3>
+        <table>
+            <tr>
+                <th width="50%">應對「威脅 (Threats)」- 負面風險</th>
+                <th width="50%">應對「機會 (Opportunities)」- 正面風險</th>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li><strong>Mitigating (減輕):</strong> 降低發生機率或減輕發生後的衝擊。</li>
+                        <li><strong>Avoiding (避免):</strong> 更改專案計畫以完全消除該風險。</li>
+                        <li><strong>Transferring (轉移):</strong> 轉嫁給第三方 (如：固定總價合約、買保險、外包)。</li>
+                        <li><strong>Escalating (上報):</strong> 超出專案經理權限，通報高層。</li>
+                        <li><strong>Retaining (承擔):</strong> 接受風險發生，不採取事前預防。</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li><strong>Exploit (開發/利用):</strong> 消除不確定性，確保機會100%發生。</li>
+                        <li><strong>Share (分享):</strong> 將所有權分配給最有能力捕捉機會的第三方。</li>
+                        <li><strong>Enhance (提高):</strong> 增加機會發生的機率或正面衝擊。</li>
+                        <li><strong>Escalate (上報):</strong> 通報高層此機會。</li>
+                        <li><strong>Accept (接受):</strong> 願意利用機會，但不主動追求。</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+
+        <h3>3. 應急規劃與緩衝 (Contingency Planning & Buffers)</h3>
+        <ul>
+            <li><strong>應急計畫 (Contingency Plan):</strong> 不是初始計畫的一部分，只有在「風險觸發 (Triggered)」時才啟動的替代方案。缺乏應急計畫會導致決策延遲或恐慌。</li>
+            <li><strong>應急資金 (Contingency Funds):</strong>
+                <ul>
+                    <li><strong>應急準備金 (Contingency reserves):</strong> 用於涵蓋「已識別」的風險，分配給特定工作包。</li>
+                    <li><strong>管理準備金 (Management reserves):</strong> 用於涵蓋「未識別 (Unidentified)」的風險，應用於整個專案層級。</li>
+                </ul>
+            </li>
+            <li><strong>時間緩衝 (Time Buffers):</strong> 用於吸收潛在延遲，常加在嚴重風險活動、容易延遲的合併活動 (Merge activities) 之後。</li>
+        </ul>
+
+        <div class="ai-guide">
+            <h4>🤖 AI Prompting 指引：生成風險管理章節</h4>
+            <p>請 AI 根據個案背景，執行以下任務：</p>
+            <ul>
+                <li><strong>Task 1:</strong> 使用 RBS 架構識別個案中的 5 個核心風險（需包含技術、排程、成本、資金等面向）。</li>
+                <li><strong>Task 2:</strong> 製作「風險嚴重性矩陣 (Risk Severity Matrix)」，設定 1-5 分的機率與衝擊，計算 FMEA 風險值。</li>
+                <li><strong>Task 3:</strong> 針對高風險項目，設計具體的「Mitigate」或「Transfer」策略，並清楚定義「觸發條件 (Trigger)」與「應急計畫 (Contingency Plan)」。</li>
+                <li><strong>Task 4:</strong> 如果個案中有利多因素，請使用「機會管理 (Exploit/Share/Enhance)」提出建議。</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Chapter 8: Scheduling Resources and Costs -->
+    <h2>Chapter 8: 資源與成本排程 (Scheduling Resources and Costs)</h2>
+    <div class="chapter-content">
+        <p><strong>核心概念：</strong>網路圖的時間不算真正的進度表，直到「資源被分配」為止。成本估計也必須經過「時間定相 (Time-phased)」才能成為預算基準。</p>
+
+        <h3>1. 專案限制分類 (Classification of Problem)</h3>
+        <ul>
+            <li><strong>時間限制型 (Time-Constrained Project):</strong> 完工日期不可變，資源可彈性增加。
+                <ul>
+                    <li><strong>解決方案 - 資源平滑化 (Resource Smoothing):</strong> 利用正的寬裕時間 (Slack) 延遲非要徑活動，以削峰填谷，降低資源需求高峰。</li>
+                    <li><strong>缺點：</strong>會減少寬裕時間，降低彈性，並產生更多要徑或近乎要徑的活動。</li>
+                </ul>
+            </li>
+            <li><strong>資源限制型 (Resource-Constrained Project):</strong> 資源上限固定不可超額，時間可彈性延長。
+                <ul>
+                    <li><strong>解決方案 - 資源平準化 (Resource Leveling):</strong> 資源不足時，延遲某些活動的晚開始時間 (Late Start)，導致專案總工期延長。</li>
+                    <li><strong>排程啟發式法則 (Heuristics Rules，平行法):</strong> 當資源發生衝突時，決定誰先拿資源的順序：<br>
+                        <strong>Rule 1:</strong> 最小寬裕時間 (Minimum slack) 優先。<br>
+                        <strong>Rule 2:</strong> 最小持續時間 (Smallest duration) 優先。<br>
+                        <strong>Rule 3:</strong> 最低活動識別碼 (Lowest activity ID) 優先。
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>2. 分割活動 (Splitting Activities)</h3>
+        <p>指中斷某項工作將資源調走，之後再回來繼續。雖然可提高資源利用率，但會產生巨大的<span class="highlight">啟動與關閉成本 (Start-up / Shut-down costs)</span>，實務上是導致專案延遲的主因，除非沒有啟動成本，否則應盡量避免。</p>
+
+        <h3>3. 多專案資源排程 (Multiproject Resource Schedules)</h3>
+        <p>共用資源會產生漣漪效應 (Ripple effect)、資源使用效率低下與瓶頸。解法包含：建立專案辦公室 (PMO)、使用優先佇列系統 (First come, first served)、外包、或聘僱臨時工。</p>
+
+        <h3>4. 建立時間定相預算基準 (Time-Phased Budget Baseline)</h3>
+        <p>為何需要？為了判斷專案是超前還是落後，以及預算是否超支。我們需要建立 <strong>計畫值 (Planned Value, PV)</strong> 作為評估已完成工作的基準。</p>
+
+        <div class="ai-guide">
+            <h4>🤖 AI Prompting 指引：生成資源與成本排程章節</h4>
+            <p>請 AI 根據個案背景，執行以下任務：</p>
+            <ul>
+                <li><strong>Task 1:</strong> 判斷該個案是「Time-Constrained」還是「Resource-Constrained」？並說明判斷依據。</li>
+                <li><strong>Task 2:</strong> 模擬一個資源衝突的情境（例如：專案中兩項任務同時需要同一台稀缺設備或關鍵人員）。請 AI 應用「啟發式法則 (Heuristics)」的 1, 2, 3 規則，逐步推演哪個任務應該先獲得資源，哪個任務必須被延遲。</li>
+                <li><strong>Task 3:</strong> 討論在該個案中，如果採取「分割活動 (Splitting)」會產生哪些隱形的啟動/關閉成本？</li>
+                <li><strong>Task 4:</strong> 說明該個案應如何建立 Time-Phased Budget Baseline 以便後續進行 EVM 追蹤。</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Chapter 9: Reducing Project Duration -->
+    <h2>Chapter 9: 縮短專案時程 (Reducing Project Duration)</h2>
+    <div class="chapter-content">
+        <p><strong>趕工 (Crashing)：</strong>在正常時間之外，以增加成本為代價來縮短活動或專案工期的過程。</p>
+
+        <h3>1. 加速專案的選項 (Options for Accelerating)</h3>
+        <table>
+            <tr>
+                <th>當資源不受限時 (Resources Not Constrained)</th>
+                <th>當資源受限時 (Resources Constrained)</th>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li>增加資源 (Add resources)</li>
+                        <li>將專案工作外包 (Outsource)</li>
+                        <li>排定加班 (Schedule overtime)</li>
+                        <li>建立核心專案團隊 (Core project team)</li>
+                        <li>做兩次 (先求快，再求好)</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>提高團隊效率 (Improve efficiency)</li>
+                        <li><strong>快速跟進 (Fast tracking):</strong> 將原本依序進行的活動改為平行 (平行作業)。</li>
+                        <li>關鍵鏈管理 (Critical-chain management)</li>
+                        <li><strong>縮減專案範疇 (Reduce scope)</strong></li>
+                        <li>降低品質標準 (Compromise quality)</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+
+        <h3>2. 專案成本-時間圖 (Project Cost-Duration Graph)</h3>
+        <ul>
+            <li><strong>間接成本 (Indirect Costs):</strong> 無法直接歸屬單一工作包的成本 (如管理費、租金、罰款)。<span class="highlight">時間越長，間接成本越高。</span></li>
+            <li><strong>直接成本 (Direct Costs):</strong> 直接指派給工作包的成本 (如人工、材料)。<span class="highlight">時間越短 (趕工)，直接成本越高。</span></li>
+            <li><strong>目標：</strong>尋找「最佳成本-時間點 (Optimum cost-time point)」，即總成本（直接+間接）最低的工期。</li>
+        </ul>
+
+        <div class="formula-box">
+            <strong>趕工決策邏輯與公式</strong><br><br>
+            尋找可以縮短的活動條件：<br>
+            1. 必須是<strong>要徑 (Critical Path)</strong> 上的活動。<br>
+            2. 具有<strong>最低的趕工成本斜率 (Lowest Cost Slope)</strong>。<br><br>
+            <code>Cost Slope = (趕工成本 Crash Cost - 正常成本 Normal Cost) / (正常時間 Normal Time - 趕工時間 Crash Time)</code>
+        </div>
+
+        <h3>3. 如果「成本」才是問題，而不是時間？</h3>
+        <p>縮減範疇、讓業主承擔更多責任、外包給更便宜的供應商、腦力激盪節省成本的方案。</p>
+
+        <div class="ai-guide">
+            <h4>🤖 AI Prompting 指引：生成縮短時程 (Crashing) 章節</h4>
+            <p>請 AI 根據個案背景，執行以下任務：</p>
+            <ul>
+                <li><strong>Task 1:</strong> 假設個案面臨「Time-to-market」壓力必須縮短時程。請 AI 提出 3 個在「資源不受限」下的加速方案，以及 2 個在「資源受限」下的加速方案 (例如 Fast tracking 的應用)。</li>
+                <li><strong>Task 2:</strong> 建立模擬數據，列出 3 個要徑活動 (A, B, C) 的正常時間/成本與趕工時間/成本，並計算出它們的 Cost Slope。</li>
+                <li><strong>Task 3:</strong> 根據 Task 2 的斜率，向老師展示團隊的最佳決策路徑 (先趕工斜率最低的活動，直到改變要徑或達到極限)。</li>
+                <li><strong>Task 4:</strong> 討論趕工可能帶來的實際風險 (Practical Considerations)，例如喪失寬裕時間、品質下降。</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Chapter 13: Progress and Performance Measurement -->
+    <h2>Chapter 13: 專案進度與績效衡量 (Progress & Performance Measurement)</h2>
+    <div class="chapter-content">
+        <p>實獲值管理 (EVM, Earned Value Management) 是一種結合範疇、時程和資源來評估專案績效的強大方法。</p>
+
+        <h3>1. EVM 核心三元素</h3>
+        <ul>
+            <li><strong>PV (Planned Value, 計畫值):</strong> 基準預算。預計到目前為止應完成的工作的預算成本 (BCWS)。</li>
+            <li><strong>AC (Actual Cost, 實際成本):</strong> 到目前為止，實際花費在已完成工作上的成本 (ACWP)。</li>
+            <li><strong>EV (Earned Value, 實獲值):</strong> 到目前為止，實際已完成工作的預算價值 (BCWP)。 <code>EV = (實際完成百分比) × (原始總預算 BAC)</code></li>
+        </ul>
+
+        <h3>2. 差異與指標分析公式總表 (Variances and Indexes)</h3>
+        <table>
+            <tr>
+                <th>類別</th>
+                <th>名稱</th>
+                <th>公式</th>
+                <th>判讀方式 (Interpretation)</th>
+            </tr>
+            <tr>
+                <td rowspan="3"><strong>變異分析 (Variances)</strong><br><small>絕對金額</small></td>
+                <td>成本變異 (CV)</td>
+                <td>EV - AC</td>
+                <td>正值 (+) = 成本節約 ; 負值 (-) = 預算超支</td>
+            </tr>
+            <tr>
+                <td>時程變異 (SV)</td>
+                <td>EV - PV</td>
+                <td>正值 (+) = 進度超前 ; 負值 (-) = 進度落後 (僅代表財務進度)</td>
+            </tr>
+            <tr>
+                <td>完工變異 (VAC)</td>
+                <td>BAC - EAC</td>
+                <td>正值 (+) = 預期總花費低於預算 ; 負值 (-) = 預期總花費超支</td>
+            </tr>
+            <tr>
+                <td rowspan="2"><strong>績效指標 (Indexes)</strong><br><small>效率比率</small></td>
+                <td>成本績效指標 (CPI)</td>
+                <td>EV / AC</td>
+                <td>> 1.00 = 成本運用效率高 (每花1元創造大於1元的價值) <br> < 1.00 = 成本效率低</td>
+            </tr>
+            <tr>
+                <td>時程績效指標 (SPI)</td>
+                <td>EV / PV</td>
+                <td>> 1.00 = 進度超前效率高 <br> < 1.00 = 進度落後</td>
+            </tr>
+        </table>
+
+        <h3>3. 預測完工成本 (Forecasting Final Project Cost)</h3>
+        <ul>
+            <li><strong>BAC (Budget at Completion):</strong> 專案原始總預算。</li>
+            <li><strong>EACre (Revised Estimated Cost at Completion):</strong> 現場專家根據新資訊重新評估的完工成本。</li>
+            <li><strong>EACf (Forecasted Total Cost at Completion):</strong> 利用目前的 CPI 推算未來的完工成本。<br>
+                <code>EACf = ETC + AC</code> (其中 ETC = 預估剩餘工作成本 = (BAC - EV) / CPI)
+            </li>
+            <li><strong>TCPI (To Complete Performance Index):</strong> 為了在預算內完工，剩餘工作必須達到的成本效率。<br>
+                <code>TCPI = (BAC - EV) / (BAC - AC)</code> ；若 > 1，代表未來工作難以在剩餘預算內完成。
+            </li>
+        </ul>
+
+        <h3>4. 其他衡量法則</h3>
+        <ul>
+            <li><strong>0/100 Rule:</strong> 工作包完成前實獲值為 0%，完成時給予 100% (適用於短天期任務)。</li>
+            <li><strong>50/50 Rule:</strong> 工作包開始即給 50%，完成時給剩下的 50%。</li>
+        </ul>
+
+        <div class="ai-guide">
+            <h4>🤖 AI Prompting 指引：生成進度績效 (EVM) 章節</h4>
+            <p>請 AI 根據個案背景，執行以下任務：</p>
+            <ul>
+                <li><strong>Task 1:</strong> 為個案設計一份「期中狀態報告 (Status Report)」。設定專案執行到第 X 個月，並虛構一組合理的 PV, AC, 實際完成百分比 數據。</li>
+                <li><strong>Task 2:</strong> 根據 Task 1 的數據，計算出 EV, CV, SV, CPI, SPI，並以表格呈現。</li>
+                <li><strong>Task 3:</strong> 解析這些指標的意義。例如：「目前的 CPI 為 0.85，SPI 為 0.9，顯示專案目前進度落後且成本超支。」</li>
+                <li><strong>Task 4:</strong> 計算預測值 EACf 與 TCPI，並基於這些冰冷的數據，提出 3 個具體的管理行動 (Corrective Actions) 以挽救專案。</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Chapter 14: Project Closure -->
+    <h2>Chapter 14: 專案結案 (Project Closure)</h2>
+    <div class="chapter-content">
+        <p>專案結案是確保交付成果被接受、資源被妥善釋放，以及組織從中獲取經驗教訓的關鍵階段。</p>
+
+        <h3>1. 專案結案的五種類型</h3>
+        <ul>
+            <li><strong>正常結案 (Normal):</strong> 專案按計畫完成。</li>
+            <li><strong>提早結案 (Premature):</strong> 產品提前交付 (可能刪減了部分功能以換取提早上線)。</li>
+            <li><strong>無止盡的專案 (Perpetual):</strong> 範疇潛變 (Scope creep) 導致專案不斷延長，需要強制結案。</li>
+            <li><strong>失敗的專案 (Failed project):</strong> 未達到技術或商業目標而終止。</li>
+            <li><strong>優先順序改變 (Changed priority):</strong> 高層策略改變導致專案被取消。</li>
+        </ul>
+
+        <h3>2. 結案六大核心活動 (Wrap-up Closure Activities)</h3>
+        <ol>
+            <li>獲得客戶的交付驗收 (Getting delivery acceptance)。</li>
+            <li>關閉資源並釋放給新用途 (Shutting down resources)。</li>
+            <li>重新分配專案團隊成員 (Reassigning members)。</li>
+            <li>結清帳戶並支付所有帳單 (Closing accounts)。</li>
+            <li>將專案(產品)交付給客戶 (Delivering the project)。</li>
+            <li>撰寫最終報告 (Creating a final report)。</li>
+        </ol>
+
+        <h3>3. 專案稽核與回顧 (Project Audits & Retrospectives)</h3>
+        <ul>
+            <li><strong>指導原則：</strong>稽核的哲學「不是獵巫 (Not a witch hunt)」，而是為了學習與保護組織資源。應對人類情緒敏感，數據必須可驗證。</li>
+            <li><strong>專案回顧 (Retrospectives):</strong> 透過獨立且受過訓練的引導者 (Facilitator)，使用問卷與一對一訪談，深入探討因果關係，並產出「經驗學習 (Lessons Learned)」。</li>
+            <li><strong>成熟度模型 (OPM3):</strong> PMI 開發的模型，分五級：初始 (Initial)、可重複 (Repeatable)、已定義 (Defined)、已管理 (Managed)、最佳化 (Optimized)。</li>
+        </ul>
+
+        <h3>4. 績效評估 (Performance Review)</h3>
+        <ul>
+            <li><strong>團隊評估：</strong>透過問卷衡量團隊如何共同工作、優勢與劣勢。</li>
+            <li><strong>個人評估：</strong>包含「發展 (Development)」(找出優缺點) 與「評估 (Evaluation)」(決定薪資)。</li>
+            <li><strong>360度回饋 (360-degree feedback):</strong> 從受其工作影響的所有人收集回饋。</li>
+            <li><strong>給予回饋的技巧：</strong>先請個人自我評估；<span class="highlight">避免與其他成員比較，應以既定標準評估</span>；批評具體行為而非個人；保持一致且公平。</li>
+        </ul>
+
+        <div class="ai-guide">
+            <h4>🤖 AI Prompting 指引：生成專案結案章節</h4>
+            <p>請 AI 根據個案背景，執行以下任務：</p>
+            <ul>
+                <li><strong>Task 1:</strong> 定義該個案的結案情境（屬於正常完工、提早、還是失敗？）。列出團隊交付產品給客戶的具体验收標準 (Acceptance criteria)。</li>
+                <li><strong>Task 2:</strong> 模擬「專案稽核報告 (Audit Report)」，寫出 3 點客觀的 Analysis (範疇/成本/時程達成率)，以及 2 點 Recommendations (技術或流程的改進建議)。</li>
+                <li><strong>Task 3:</strong> 提煉出該專案的 3 個 <strong>Lessons Learned (經驗教訓)</strong>。明確指出在過程中犯的錯誤，以及未來類似專案應如何避免。</li>
+                <li><strong>Task 4:</strong> 說明如何對個案中的團隊成員進行「績效評估」，並列舉在評估會議中會使用的 2 個良好溝通原則 (如：對事不對人、不與他人比較)。</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
