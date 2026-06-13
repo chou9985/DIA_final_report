@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行銷科學期中報告 - 10分鐘上台簡報提詞系統</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+        }
+        .slide-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+    <!-- 頂部導覽列與即時計時器 -->
+    <header class="bg-slate-800 border-b border-slate-700 px-6 py-4 sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded">LIVE 報告工具</span>
+                <div>
+                    <h1 class="text-lg font-bold text-slate-100">行銷科學期中作業：監督式學習分析</h1>
+                    <p class="text-xs text-slate-400">學生：周育謙 (N11423006) | 隨機森林：高咖少睡風險族預測</p>
+                </div>
+            </div>
+            
+            <!-- 上台倒數 10 分鐘計時器 -->
+            <div class="flex items-center gap-4 bg-slate-950 px-4 py-2 rounded-lg border border-slate-700">
+                <div class="text-center">
+                    <span class="text-xs text-slate-400 block uppercase tracking-wider font-semibold">報告倒數</span>
+                    <span id="timer" class="text-2xl font-mono font-bold text-red-400">10:00</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <button id="startBtn" onclick="toggleTimer()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 py-1 rounded font-medium transition">
+                        開始計時
+                    </button>
+                    <button id="resetBtn" onclick="resetTimer()" class="bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs px-3 py-1 rounded transition">
+                        重設
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主工作區：左側簡報投影片與數據，右側口說重點備忘錄 -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- 左側：簡報模擬與圖表展示區域 (占 7 欄) -->
+        <section class="lg:col-span-7 flex flex-col gap-6">
+            <!-- 投影片看板容器 -->
+            <div class="bg-slate-950 rounded-2xl border border-slate-800 p-6 shadow-2xl relative min-h-[460px] flex flex-col justify-between overflow-hidden">
+                <!-- 裝飾背景網格 -->
+                <div class="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_1px]"></div>
+                
+                <!-- 投影片頂部資訊 -->
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3 z-10">
+                    <span class="text-xs font-semibold text-sky-400 tracking-widest uppercase">SLIDE PREVIEW</span>
+                    <span id="slidePageNum" class="text-xs text-slate-400 bg-slate-800 px-2 py-1 rounded font-mono">Slide 1 of 6</span>
+                </div>
+
+                <!-- 投影片動態內容 -->
+                <div id="slideContent" class="my-auto py-6 z-10">
+                    <!-- JS 動態插入 -->
+                </div>
+
+                <!-- 投影片底部導航 -->
+                <div class="flex items-center justify-between pt-4 border-t border-slate-800 z-10">
+                    <button onclick="prevSlide()" class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                        上一頁
+                    </button>
+                    
+                    <!-- 快速跳轉點點 -->
+                    <div class="flex gap-2">
+                        <span onclick="goToSlide(1)" class="w-2.5 h-2.5 rounded-full bg-sky-500 cursor-pointer slide-indicator"></span>
+                        <span onclick="goToSlide(2)" class="w-2.5 h-2.5 rounded-full bg-slate-700 cursor-pointer slide-indicator"></span>
+                        <span onclick="goToSlide(3)" class="w-2.5 h-2.5 rounded-full bg-slate-700 cursor-pointer slide-indicator"></span>
+                        <span onclick="goToSlide(4)" class="w-2.5 h-2.5 rounded-full bg-slate-700 cursor-pointer slide-indicator"></span>
+                        <span onclick="goToSlide(5)" class="w-2.5 h-2.5 rounded-full bg-slate-700 cursor-pointer slide-indicator"></span>
+                        <span onclick="goToSlide(6)" class="w-2.5 h-2.5 rounded-full bg-slate-700 cursor-pointer slide-indicator"></span>
+                    </div>
+
+                    <button onclick="nextSlide()" class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-sm font-medium transition">
+                        下一頁
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 核心實驗成果數據看板 (Static Dashboard) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-slate-850 p-4 rounded-xl border border-slate-750 text-center">
+                    <span class="text-xs text-slate-400 block mb-1">整體準確率</span>
+                    <span class="text-2xl font-bold text-sky-400 font-mono">95.30%</span>
+                </div>
+                <div class="bg-slate-850 p-4 rounded-xl border border-slate-750 text-center">
+                    <span class="text-xs text-slate-400 block mb-1">高風險召回率 (KPI)</span>
+                    <span class="text-2xl font-bold text-emerald-400 font-mono">94.03%</span>
+                </div>
+                <div class="bg-slate-850 p-4 rounded-xl border border-slate-750 text-center">
+                    <span class="text-xs text-slate-400 block mb-1">高風險精確率</span>
+                    <span class="text-2xl font-bold text-indigo-400 font-mono">91.78%</span>
+                </div>
+                <div class="bg-slate-850 p-4 rounded-xl border border-slate-750 text-center">
+                    <span class="text-xs text-slate-400 block mb-1">AUC-ROC 分數</span>
+                    <span class="text-2xl font-bold text-amber-400 font-mono">0.9928</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 右側：10分鐘口說重點與教授評分亮點 (占 5 欄) -->
+        <section class="lg:col-span-5 bg-slate-800 rounded-2xl border border-slate-700 p-6 flex flex-col justify-between shadow-xl">
+            <div>
+                <!-- 右側頂部狀態 -->
+                <div class="flex items-center justify-between border-b border-slate-700 pb-3 mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span class="text-sm font-bold text-slate-100">口說提示 & 逐字備忘稿</span>
+                    </div>
+                    <span id="targetDuration" class="text-xs text-amber-400 bg-amber-900/40 px-2 py-0.5 rounded font-medium">建議時間：00:00 - 01:30</span>
+                </div>
+
+                <!-- 教授關注評分檢查點提示 (Grounded in syllabus) -->
+                <div class="bg-slate-900/60 p-3 rounded-lg border border-slate-700/60 mb-4">
+                    <span class="text-xs text-sky-400 font-bold block mb-1">💡 教授評分必看亮點 (本頁強調重點)：</span>
+                    <p id="profTip" class="text-xs text-slate-300 leading-relaxed">
+                        載入中...
+                    </p>
+                </div>
+
+                <!-- 逐字稿與重點關鍵字 -->
+                <div class="space-y-4">
+                    <div>
+                        <span class="text-xs font-semibold text-slate-400 block mb-1">🗣️ 上台直接講這段 (逐字稿提詞)：</span>
+                        <div id="speechScript" class="bg-slate-900 p-4 rounded-xl text-slate-200 text-sm leading-relaxed border border-slate-750 max-h-[220px] overflow-y-auto">
+                            <!-- JS 動態插入 -->
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="text-xs font-semibold text-slate-400 block mb-1.5">🔑 本頁必講行銷學術黑話：</span>
+                        <div id="buzzwords" class="flex flex-wrap gap-2">
+                            <!-- JS 動態插入 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 報告技巧叮嚀 -->
+            <div class="mt-6 pt-4 border-t border-slate-700 flex items-center gap-3">
+                <div class="bg-slate-900 p-2 rounded-lg text-amber-400">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-slate-100 block">育謙報告提示：</span>
+                    <span class="text-xs text-slate-400 block">放慢速度，咬字清晰。眼神要與台下的老師和助教交流，不要一直死盯著螢幕看！</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 底部資訊與互動模式說明 -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-4 px-6 text-center text-xs text-slate-500">
+        <p>© 2026 國立雲林科技大學 管理學院《行銷科學》課程期中簡報輔助系統 - N11423006 周育謙 專屬</p>
+    </footer>
+
+    <!-- JS 邏輯區：控制簡報、計時器、以及各投影片的逐字稿與提示 -->
+    <script>
+        // 投影片數據庫
+        const slides = [
+            {
+                id: 1,
+                title: "Slide 1: 背景、動機與研究定位",
+                timeRange: "00:00 - 01:30 (建議長度：1分半)",
+                profTip: "教授非常看重「承接關係(Heritage)」。一定要說清楚，這次的監督式預測標籤，是直接承接上次 K-means 分群發現最具有干預價值的「群集 2：高咖少睡風險族」，不要各寫各的！",
+                script: "各位老師、助教好，我是周育謙。今天我的期中報告題目是『高咖少睡風險族群的即時預測模型建立』。<br><br>我們承接上一次非監督分群的分析成果，上次透過 K-means 我們『發現』了群集 2（高咖少睡風險族）具有高度主觀高壓與睡眠不足的嚴重痛點。然而，非監督方法沒辦法即時貼標新顧客。為了完成從『群體洞察』到『個體即時決策』的部署，本研究建立隨機森林作為『代理分類器』，動態高度逼近 K-means 的幾何決策邊界，實現毫秒級的 MLOps 個人化行銷觸發！",
+                buzzwords: ["非監督延伸至監督", "代理分類器 (Proxy Classifier)", "個體即時推論", "行銷閉環"],
+                html: `
+                    <div class="text-center">
+                        <span class="text-xs text-sky-400 font-bold uppercase tracking-wider">行銷科學期中作業報告</span>
+                        <h2 class="text-2xl font-extrabold text-white mt-2 mb-4 leading-tight">Synthetic Coffee Health Dataset<br>監督式學習與精準行銷預測實作</h2>
+                        <div class="inline-block bg-slate-900 border border-slate-800 rounded-xl p-4 my-2 text-left text-xs space-y-1.5 max-w-md mx-auto">
+                            <p class="text-slate-300"><strong class="text-sky-400">應變數 (DV)：</strong>是否為高風險族群 (1 = K-means 群集 2；0 = 其餘合併)</p>
+                            <p class="text-slate-300"><strong class="text-sky-400">自變數 (IV)：</strong>年齡、咖啡因攝取、睡眠時數、BMI、心率、每週運動時數</p>
+                            <p class="text-slate-300"><strong class="text-sky-400">主要模型：</strong>隨機森林 (Random Forest)</p>
+                        </div>
+                        <p class="text-slate-400 text-xs mt-4">學生：周育謙 (N11423006) | 指導教授評核</p>
+                    </div>
+                `
+            },
+            {
+                id: 2,
+                title: "Slide 2: 資料轉換與變數篩選思維",
+                timeRange: "01:30 - 03:00 (建議長度：1分半)",
+                profTip: "必須大方說出你在 Y（應變數）上做了『結果端的資料轉換』，這是 W15 課程中老師親口強調的高分計分點！同時，要向老師解釋為什麼排除 Gender、Country 等類別型特徵（為保留高資訊量、連續型的行為強度變異，防範維度膨脹）。",
+                script: "在變數篩選與資料前處理階段，本案有兩個核心決策亮點。<br><br>第一、我們實作了高階的『結果端（應變數 DV）資料轉換（Data Transformation）』。我們將原始 Cluster 0 與 1 合併編碼為 0（非高風險大眾），Cluster 2 編碼為 1。這完全符合 Week 15 課程中提到的，將預備要預測的結果轉換為二元標記。<br><br>第二、自變數我們保留了 6 個客觀連續變數，未進行人為離散化分箱。隨機森林原生支援連續特徵，這使我們能最大化保留受測者的行為強度變異，並在訓練前進行了嚴謹的 Z-score 標準化。",
+                buzzwords: ["結果端資料轉換", "資料二元化 (Data Binarization)", "行為強度變異", "維度膨脹防禦"],
+                html: `
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-3">🛠️ 資料轉換與變數配置 (符合 3rd-2 規範)</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 text-xs">
+                                <span class="text-sky-400 font-bold block mb-1">結果端 DV 資料轉換</span>
+                                <p class="text-slate-300 leading-relaxed">
+                                    將 K-means 分群轉換為二元標記：<br>
+                                    <strong class="text-emerald-400">Class 1：</strong>原群集 2 (32.6%) — 高咖少睡族<br>
+                                    <strong class="text-slate-400">Class 0：</strong>群集 0 & 1 合併 (67.4%) — 一般大眾
+                                </p>
+                            </div>
+                            <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 text-xs">
+                                <span class="text-indigo-400 font-bold block mb-1">自變數 (IV) 排除哲學</span>
+                                <p class="text-slate-300 leading-relaxed">
+                                    - <strong class="text-red-400">排除 Coffee_Intake：</strong>與咖啡因(mg)高度共線 (R=0.9998)。<br>
+                                    - <strong class="text-red-400">排除人口統計與二元布林：</strong>無法反映行為強度、易造成維度膨脹。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 3,
+                title: "Slide 3: 模型選用與合理性評估",
+                timeRange: "03:00 - 05:00 (建議長度：2分鐘)",
+                profTip: "在這裡，一定要秀出你對五大模型的對照與深刻理解。提到 SVM 時，大方引用老師的「線切得越寬越好(Margin)」概念，並解釋為什麼在這個情境中「隨機森林」才是最適合的（非線性邊界擬合極佳、輸出特徵重要性、防止決策樹 Overfitting）。",
+                script: "我們為什麼最終選用隨機森林模型，而非其他四種課堂介紹的方法呢？<br><br>我們製作了嚴密的模型適用性對照表。第一、雖然老師提到支持向量機 (SVM) 追求『分類線或超平面切得越寬越好、最大化 Margin』，但 SVM 對非線性複雜數據的參數調校極其敏感，且是黑盒子，無法輸出特徵重要性。<br><br>隨機森林原生支援多連續自變數，透過 Bootstrap 隨機抽樣與隨機選特徵的集成投票，能完美捕捉高維幾何複雜非線性邊界，克服了單棵決策樹容易 Overfitting（過度擬合）的死穴，同時能原生輸出 Gini 特徵重要性，具有極高的商業可解釋性，因此在本案最為適用。",
+                buzzwords: ["最大化邊界 (Margin)", "Bootstrap 抽樣", "過度擬合 (Overfitting)", "特徵重要性 (Feature Importance)"],
+                html: `
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">📊 五大監督式模型適用性對比 (與課堂觀念完美結合)</h3>
+                        <table class="w-full text-left border-collapse text-[11px] bg-slate-900 rounded-lg overflow-hidden">
+                            <thead>
+                                <tr class="bg-slate-800 text-slate-300 font-bold">
+                                    <th class="p-2 border-b border-slate-700">模型</th>
+                                    <th class="p-2 border-b border-slate-700">適用情境</th>
+                                    <th class="p-2 border-b border-slate-700">本案適用度</th>
+                                    <th class="p-2 border-b border-slate-700">捨棄/選用原因</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-300">
+                                <tr class="border-b border-slate-800">
+                                    <td class="p-2 font-bold text-red-400">線性迴歸</td>
+                                    <td class="p-2">連續型數值預測</td>
+                                    <td class="p-2">不適用</td>
+                                    <td class="p-2">預測目標 DV 是分類(0/1)而非連續值</td>
+                                </tr>
+                                <tr class="border-b border-slate-800">
+                                    <td class="p-2 font-bold text-indigo-400">邏輯斯迴歸</td>
+                                    <td class="p-2">線性二分類</td>
+                                    <td class="p-2">可用，但有侷限</td>
+                                    <td class="p-2">K-means 邊界非線性，容易在交界產生系統性誤判</td>
+                                </tr>
+                                <tr class="border-b border-slate-800">
+                                    <td class="p-2 font-bold text-indigo-400">支持向量機</td>
+                                    <td class="p-2">尋求最大分類 Margin</td>
+                                    <td class="p-2">不適用</td>
+                                    <td class="p-2">黑盒子模型，難以向行銷業務端輸出特徵重要性</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold text-emerald-400">隨機森林</td>
+                                    <td class="p-2">高維非線性複雜分類</td>
+                                    <td class="p-2 font-bold text-emerald-400">✔ 最推薦</td>
+                                    <td class="p-2 text-emerald-300 font-medium">集成學習克服過擬合，輸出特徵權重</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            },
+            {
+                id: 4,
+                title: "Slide 4: 實驗成果、混淆矩陣與指標解讀",
+                timeRange: "05:00 - 07:00 (建議長度：2分鐘)",
+                profTip: "這是全班最具深度的段落！一定要說出你的 Y 分布為 67:33，這在數據科學上屬於『接近平衡(Marginally Balanced)』，因此 95.30% 的 Accuracy 非常具有參考實益！同時，把行銷挽留的情境與『Recall召回率 94.03%』做硬綁定，實行『寧可錯殺，不可漏抓』的關懷防流失機制！",
+                script: "我們來看最重要的成績單：Classification Report。<br><br>我們在 2,000 筆測試集上取得 95.30% 的 Accuracy。這裡我要向老師特別報告，因為本案 Y 的分布約為 67:33，資料並非極度失衡（像老師上課提到的 95 比 5 癌症例子），因此 95.3% 的 Accuracy 具有高度的統計參考實益。<br><br>另外，我們採取『寧可錯發廣告，不願漏抓流失客戶』的行銷防禦原則，因此鎖定 召回率 (Recall) 作為最核心的指標。我們的高風險 Recall 達到了極高的 94.03%！代表 653 個高風險用戶中，我們撈回了 614 個，漏網之魚只有 39 個人。這保證了高風險用戶的最高防禦覆蓋率！",
+                buzzwords: ["接近平衡資料", "Accuracy 統計實益", "Recall 優先原則", "寧可錯殺，不可放過"],
+                html: `
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">🏆 模型效能與混淆矩陣 (2x2 完美決策閉環)</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- 混淆矩陣模擬 -->
+                            <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 text-xs">
+                                <span class="text-sky-400 font-bold block mb-2">混淆矩陣 (Confusion Matrix)</span>
+                                <div class="grid grid-cols-3 gap-1.5 text-center text-[10px]">
+                                    <div class="p-1"></div>
+                                    <div class="bg-slate-850 p-1 text-slate-400 font-bold">預測=0</div>
+                                    <div class="bg-slate-850 p-1 text-slate-400 font-bold">預測=1</div>
+                                    
+                                    <div class="bg-slate-850 p-1 text-slate-400 font-bold flex items-center justify-center">實際=0</div>
+                                    <div class="bg-slate-800/80 p-2 text-slate-300"><strong class="text-sky-400">TN</strong><br>1,292</div>
+                                    <div class="bg-slate-800/80 p-2 text-slate-300"><strong class="text-red-400">FP</strong><br>55</div>
+                                    
+                                    <div class="bg-slate-850 p-1 text-slate-400 font-bold flex items-center justify-center">實際=1</div>
+                                    <div class="bg-slate-800/80 p-2 text-slate-300"><strong class="text-red-400">FN</strong><br>39</div>
+                                    <div class="bg-sky-900/60 p-2 text-sky-200 border border-sky-500/30"><strong class="text-emerald-400">TP</strong><br>614</div>
+                                </div>
+                                <span class="text-[9px] text-slate-500 mt-2 block">※ 高風險 Recall 達 94.03%，漏抓率(FN)僅為 5.97%</span>
+                            </div>
+                            
+                            <!-- 指標摘要 -->
+                            <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 text-xs flex flex-col justify-between">
+                                <span class="text-sky-400 font-bold block mb-1">加權平均與模型公正度</span>
+                                <div class="space-y-1 text-slate-300">
+                                    <p><strong class="text-slate-400">Macro Avg F1-Score:</strong> 0.9469</p>
+                                    <p><strong class="text-slate-400">Weighted Avg Precision:</strong> 0.9534</p>
+                                    <p><strong class="text-slate-400">Weighted Avg Recall:</strong> 0.9530</p>
+                                    <p><strong class="text-slate-400">AUC-ROC:</strong> 0.9928 (極度強悍穩定)</p>
+                                </div>
+                                <p class="text-[9px] text-slate-400 leading-relaxed border-t border-slate-800 pt-1.5 mt-2">
+                                    高達 94.42% 的 Macro Avg 指標，證實模型並無偏袒多數類的虛高欺敵現象。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 5,
+                title: "Slide 5: 特徵重要性與分群還原呼應",
+                timeRange: "07:00 - 08:30 (建議長度：1分半)",
+                profTip: "這裡一定要將目前的『特徵重要性』與前次報告『K-means 的群集質心』進行學術因果上的回溯與呼應。咖啡因(48.04%)加上睡眠時數(32.47%)總權重高達 80.5%，正是隨機森林用數據在強力背書、量化前次我們將群集 2 命名為『高咖少睡風險族』的行為輪廓！",
+                script: "隨機森林輸出最棒的地方，在於它幫我們做到了前後報告的學術因果驗證與回溯。<br><br>我們來看特徵重要性。咖啡因攝取量（Caffeine_mg）佔了決策權重的 48.04%，睡眠時數（Sleep_Hours）佔了 32.47%。這兩大核心行為特徵，就拿下了超過 80.5% 的分類決策決定權！這完全吻合我們上週為群集 2 所命名的『高咖少睡』核心特質。<br><br>靜止心率、BMI、每週運動時數、年齡等生理靜態特徵則扮演了輔助修正的邊界角色。這量化證實了我們的分類器確實學到了在六維特徵空間中最關鍵的生活型態行為指標，而非依賴無效的人口統計變數，在因果關係上非常嚴密。",
+                buzzwords: ["特徵重要性", "Gini 不純度下降量", "多維度相互驗證", "客觀行為特質"],
+                html: `
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">🎯 特徵重要性與幾何分布驗證 (決策雙軸)</h3>
+                        <div class="space-y-2 text-xs bg-slate-900 p-3 rounded-lg border border-slate-800">
+                            <div>
+                                <div class="flex justify-between text-slate-300 mb-1">
+                                    <span>☕ 咖啡因攝取量 (Caffeine_mg)</span>
+                                    <span class="font-mono text-red-400 font-bold">48.04%</span>
+                                </div>
+                                <div class="w-full bg-slate-800 rounded-full h-2">
+                                    <div class="bg-red-500 h-2 rounded-full" style="width: 48.04%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-slate-300 mb-1">
+                                    <span>😴 睡眠時數 (Sleep_Hours)</span>
+                                    <span class="font-mono text-sky-400 font-bold">32.47%</span>
+                                </div>
+                                <div class="w-full bg-slate-800 rounded-full h-2">
+                                    <div class="bg-sky-500 h-2 rounded-full" style="width: 32.47%"></div>
+                                </div>
+                            </div>
+                            <div class="pt-1.5 border-t border-slate-800 text-[10px] text-slate-400 leading-relaxed">
+                                <strong class="text-amber-400">雙軸決策：</strong>咖啡因 + 睡眠時數 = <strong class="text-white text-xs font-mono">80.51%</strong> 的分類權重。<br>
+                                這完美背書了前作 K-means 發現的「高咖少睡風險族」行為模型，並證實人口與 BMI 在此並不具區隔力。
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 6,
+                title: "Slide 6: 概率梯度行銷規劃與總結",
+                timeRange: "08:30 - 10:00 (建議長度：1分半)",
+                profTip: "最後，要把你的機器學習模型與「精密差異化行銷(Precision Marketing)」結合起來。向教授報告：因為隨機森林原生能輸出『連續預測概率 (predict_proba)』，我們行銷系統才可以實現動態分級門檻，而不是生硬地一刀切！這才是企業最需要的落地 MLOps 行戰邏輯！",
+                script: "最後，這套模型要如何驅動品牌的實際行銷決策？這是本案最大的實務價值：我們打造了『即時健康風險標籤系統』，利用 predict_proba 輸出連續概率。<br><br>我們不生硬地一刀切，而是實施動態分級行銷。第一、當顧客被模型預測 HighRiskProb 大於等於 70%，代表重度疲勞與成癮。我們在深夜短睡時段，強推無咖啡因高機能助眠茶高額折價券。第二、概率在 50% 到 70% 之間，我們進行溫和關懷推送，觀察後續行為。第三、大於 0.5 我們採取 Recall 優先，寧可錯發，保證覆蓋。第四、概率小於 50% 則自動合併久坐與運動大眾，進行常態品牌維護、推廣普通保養，不亂丟高價助眠廣告，將行銷預算效益 (ROI) 最大化。謝謝各位老師，我的報告到此結束，謝謝！",
+                buzzwords: ["連續預測概率 (predict_proba)", "門檻分級觸發", "MLOps 系統部署", "精密行銷 (Precision Marketing)"],
+                html: `
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">🚀 精密行銷閉環：基於概率梯度的進階應用</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[10px] bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                            <div class="space-y-1.5 border-r border-slate-800 pr-2">
+                                <span class="text-emerald-400 font-bold block text-xs">預測 = 1：高風險精準打擊 (Recall 優先)</span>
+                                <p class="text-slate-300"><strong class="text-white">高強度 (概率 ≥ 70%)：</strong> 深夜/清晨發送個人化健康 PUSH 通知，發放「高機能舒眠飲」專屬高額折價券。</p>
+                                <p class="text-slate-300"><strong class="text-white">中強度 (50%~70%)：</strong> 溫和導入減壓計畫，觀察行為再升級觸達強度。</p>
+                            </div>
+                            <div class="space-y-1.5 pl-1">
+                                <span class="text-sky-400 font-bold block text-xs">預測 = 0：常態常規經營 (Precision 優先)</span>
+                                <p class="text-slate-300"><strong class="text-white">常態常規維繫 (概率 < 50%)：</strong> 合併作息正常健身與久坐受眾。展示日常保養常規品（如運動補給、一般低負擔咖啡），嚴控行銷成本，防堵用戶防禦反感。</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        let currentSlideIndex = 0;
+        let timerInterval = null;
+        let timeLeft = 600; // 10 minutes in seconds
+        let isTimerRunning = false;
+
+        // 初始化投影片與口說稿
+        function initApp() {
+            renderSlide(currentSlideIndex);
+            updateIndicators();
+        }
+
+        // 渲染指定 Index 的投影片與右側口說內容
+        function renderSlide(index) {
+            const slide = slides[index];
+            
+            // 渲染左側投影片
+            document.getElementById('slideContent').innerHTML = slide.html;
+            document.getElementById('slidePageNum').innerText = `Slide ${slide.id} of ${slides.length}`;
+            
+            // 渲染右側提詞稿
+            document.getElementById('targetDuration').innerText = `建議時間帶：${slide.timeRange}`;
+            document.getElementById('profTip').innerHTML = slide.profTip;
+            document.getElementById('speechScript').innerHTML = slide.script;
+            
+            // 渲染關鍵字
+            const buzzwordsContainer = document.getElementById('buzzwords');
+            buzzwordsContainer.innerHTML = '';
+            slide.buzzwords.forEach(word => {
+                const badge = document.createElement('span');
+                badge.className = 'bg-slate-700 text-sky-300 text-xs px-2.5 py-1 rounded-full font-medium border border-slate-600 shadow-sm';
+                badge.innerText = word;
+                buzzwordsContainer.appendChild(badge);
+            });
+        }
+
+        // 更新投影片指示點
+        function updateIndicators() {
+            const indicators = document.querySelectorAll('.slide-indicator');
+            indicators.forEach((ind, i) => {
+                if (i === currentSlideIndex) {
+                    ind.className = 'w-2.5 h-2.5 rounded-full bg-sky-500 cursor-pointer slide-indicator';
+                } else {
+                    ind.className = 'w-2.5 h-2.5 rounded-full bg-slate-700 cursor-pointer slide-indicator hover:bg-slate-600';
+                }
+            });
+        }
+
+        // 上一頁
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                renderSlide(currentSlideIndex);
+                updateIndicators();
+            }
+        }
+
+        // 下一頁
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                renderSlide(currentSlideIndex);
+                updateIndicators();
+            }
+        }
+
+        // 點擊點點跳轉
+        function goToSlide(slideId) {
+            currentSlideIndex = slideId - 1;
+            renderSlide(currentSlideIndex);
+            updateIndicators();
+        }
+
+        // 倒數計時器邏輯
+        function toggleTimer() {
+            const startBtn = document.getElementById('startBtn');
+            if (isTimerRunning) {
+                // 暫停
+                clearInterval(timerInterval);
+                startBtn.innerText = '恢復計時';
+                startBtn.className = 'bg-sky-600 hover:bg-sky-700 text-white text-xs px-3 py-1 rounded font-medium transition';
+                isTimerRunning = false;
+            } else {
+                // 開始
+                timerInterval = setInterval(updateTimer, 1000);
+                startBtn.innerText = '暫停';
+                startBtn.className = 'bg-amber-600 hover:bg-amber-700 text-white text-xs px-3 py-1 rounded font-medium transition';
+                isTimerRunning = true;
+            }
+        }
+
+        function updateTimer() {
+            if (timeLeft > 0) {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timer').innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                // 動態時間管理警告
+                if (timeLeft < 180) { // 剩不到 3 分鐘
+                    document.getElementById('timer').className = "text-2xl font-mono font-bold text-red-500 animate-pulse";
+                }
+            } else {
+                clearInterval(timerInterval);
+                document.getElementById('timer').innerText = "00:00";
+                document.getElementById('timer').className = "text-2xl font-mono font-bold text-red-600";
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timeLeft = 600;
+            document.getElementById('timer').innerText = "10:00";
+            document.getElementById('timer').className = "text-2xl font-mono font-bold text-red-400";
+            document.getElementById('startBtn').innerText = '開始計時';
+            document.getElementById('startBtn').className = 'bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 py-1 rounded font-medium transition';
+            isTimerRunning = false;
+        }
+
+        // 初始化
+        window.onload = function() {
+            initApp();
+        };
+    </script>
+</body>
+</html>
