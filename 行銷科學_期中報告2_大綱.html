@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>期中報告講稿：監督式學習分析</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+        .slide-card { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-left: 5px solid #3498db; }
+        .time-badge { background-color: #e74c3c; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 0.9em; font-weight: bold; float: right; }
+        h2 { color: #2980b9; margin-top: 0; }
+        .concept { background-color: #ecf0f1; padding: 10px; border-radius: 5px; margin: 10px 0; border-left: 4px solid #f1c40f; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        .highlight { color: #c0392b; font-weight: bold; }
+        .speech-notes { color: #7f8c8d; font-style: italic; background: #fdfbf7; padding: 10px; border: 1px dashed #ccc; margin-top: 10px;}
+    </style>
+</head>
+<body>
+
+    <h1>☕ Synthetic Coffee Health Dataset<br>高咖少睡風險族即時預測</h1>
+    <p style="text-align: center; font-size: 1.2em; color: #555;">行銷科學期中報告 | 報告人：周育謙</p>
+
+    <!-- Slide 1 -->
+    <div class="slide-card">
+        <span class="time-badge">⏳ 預計時間：2 分鐘</span>
+        <h2>1. 研究動機與任務定義</h2>
+        <ul>
+            <li><strong>前情提要：</strong>上次作業透過 K-means，我們找出了三個客群，其中「<span class="highlight">群集 2：高咖少睡風險族</span>」具有最高商業開發價值（高壓力、睡眠差）。</li>
+            <li><strong>本次痛點：</strong>分群是「靜態」的，缺乏特徵權重，也無法做到「即時預測」。</li>
+            <li><strong>任務定義：</strong>將「靜態洞察」轉為「動態預測引擎」。以 6 個客觀連續變數（年齡、咖啡因、睡眠、BMI、心率、運動），訓練二元分類模型，即時抓出高風險客群。</li>
+        </ul>
+        <div class="speech-notes">
+            🗣️ <strong>口語表達提示：</strong><br>
+            「各位好，延續上次的無監督式分群，我們已經知道市場上有一群『咖啡喝很多、睡很少』的高風險顧客。但實務上，行銷系統不能每次有新客就重跑全部分群。因此，今天的目標是訓練一個分類器，只要輸入顧客的 6 個客觀行為數據，就能立刻判定他是不是我們要打擊的目標客群。」
+        </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide-card">
+        <span class="time-badge">⏳ 預計時間：2.5 分鐘</span>
+        <h2>2. 模型選擇與資料處理策略</h2>
+        <ul>
+            <li><strong>為何選用「隨機森林 (Random Forest)」？</strong>
+                <ul>
+                    <li>能夠捕捉複雜的 <span class="highlight">非線性決策邊界</span>。</li>
+                    <li>能直接輸出 <span class="highlight">特徵重要性 (Feature Importance)</span>，具備強大商業解釋力。</li>
+                    <li>輸出連續的 <span class="highlight">預測機率 (Probability)</span>，利於後續行銷分級。</li>
+                </ul>
+            </li>
+            <li><strong>資料處理巧思：</strong>
+                <ul>
+                    <li>使用 `class_weight='balanced'` 處理 1:2 的類別比例。</li>
+                    <li><span class="highlight">保留連續變數，不人工分箱：</span>讓演算法自己找切點，保留最大的行為變異性，不流失邊界資訊。</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="speech-notes">
+            🗣️ <strong>口語表達提示：</strong><br>
+            「在方法上我們捨棄了邏輯斯迴歸或 SVM。為什麼？因為我們需要向業務端『解釋』是哪些行為導致風險，而且決策邊界不是直線的。隨機森林不但能防過擬合，還能告訴我們特徵權重。此外，我刻意不把『睡眠時數』切成高低，而是保留原始連續數值，讓模型自己去尋找最精準的切割點。」
+        </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide-card">
+        <span class="time-badge">⏳ 預計時間：3 分鐘</span>
+        <h2>3. 關鍵成效與特徵洞察 (核心重點)</h2>
+        <div class="concept">
+            <strong>💡 核心觀念：「寧可錯殺，不可放過」的商業指標取捨</strong><br>
+            漏抓一個高風險顧客（FN）的機會成本，遠大於錯發一則廣告（FP）的預算。因此本案 <span class="highlight">首重「召回率 (Recall)」</span>。
+        </div>
+        <ul>
+            <li><strong>模型表現：</strong>準確率 95.3%，<span class="highlight">高風險群召回率達 94.03%</span>。(僅漏掉 39 位潛在顧客)。</li>
+            <li><strong>防禦性聲明：</strong>準確率高是因為應變數是由這 6 個特徵衍生而來。本模型的定位是極低延遲的「代理模型 (Proxy Model)」。</li>
+            <li><strong>特徵重要性 (Gini)：</strong>
+                <ul>
+                    <li>Top 1: 咖啡因攝取量 (48%)</li>
+                    <li>Top 2: 睡眠時數 (32%)</li>
+                    <li>兩者加總佔 80%，完美印證我們對「高咖少睡」的行為假設。</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="speech-notes">
+            🗣️ <strong>口語表達提示：</strong><br>
+            「這是今天的核心表現。在行銷上，錯發一封 EDM 給普通顧客成本很低，但錯失一個極需助眠產品的顧客損失很大。所以我們看重 Recall。模型成功抓出了 94% 的目標。另外，特徵重要性圖表顯示，咖啡因和睡眠時數主導了 80% 的決策權，這證明模型學到的不是雜訊，而是真正符合商業邏輯的行為特徵。」
+        </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide-card">
+        <span class="time-badge">⏳ 預計時間：2 分鐘</span>
+        <h2>4. 行銷落地應用：概率梯度推播</h2>
+        <ul>
+            <li>不只是給 0 或 1 的標籤，我們利用模型輸出的 <span class="highlight">風險機率值 (HighRiskProb)</span> 實施非對稱資源配置。</li>
+            <li><strong>高風險群 (機率 ≥ 50%)：主打「行為轉移」</strong>
+                <ul>
+                    <li>推薦：低因咖啡 (Decaf)、助眠保健品。</li>
+                    <li>時機：深夜或清晨 (針對疲勞痛點)。</li>
+                    <li>進階：機率 ≥ 70% 者給予更高強度促銷與限時優惠。</li>
+                </ul>
+            </li>
+            <li><strong>非高風險群 (機率 < 50%)：主打「特質鞏固」</strong>
+                <ul>
+                    <li>推薦：一般日常保健、運動補給 (不推急性干預產品以免反感)。</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="speech-notes">
+            🗣️ <strong>口語表達提示：</strong><br>
+            「最後，有了模型不能只放著。我們利用隨機森林輸出的『機率』來做行銷自動化。超過 50% 門檻的，我們在深夜推播助眠或低因產品；特別是機率大於 70% 的極高風險群，我們會直接發送限時折扣促使轉換。低於 50% 的我們就不打擾，只做一般品牌維護。這就是預測模型創造的精準行銷價值。」
+        </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide-card">
+        <span class="time-badge">⏳ 預計時間：0.5 分鐘</span>
+        <h2>5. 總結</h2>
+        <ul>
+            <li>成功將 K-means 的靜態洞察，轉化為準確率達 95%、召回率達 94% 的即時預測分類器。</li>
+            <li>透過隨機森林，我們不僅做到高預測力，更具備高解釋性 (特徵重要性)。</li>
+            <li>最終產出的「風險機率」能無縫接軌 CRM 系統，實現自動化與差異化的行銷觸及。</li>
+        </ul>
+        <div class="speech-notes">
+            🗣️ <strong>口語表達提示：</strong><br>
+            「總結來說，這個作業展示了從『資料洞察』到『建立系統』再到『行銷決策』的完整 Pipeline，謝謝大家的聆聽。」
+        </div>
+    </div>
+
+</body>
+</html>
